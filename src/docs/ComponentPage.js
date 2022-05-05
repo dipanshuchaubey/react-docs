@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import CodeWrapper from './CodeWrapper'
 
 const ComponentPage = ({ component }) => {
+  const [showCode, setShowCode] = useState(false)
+
+  useEffect(() => {
+    setShowCode(false)
+  }, [component])
+
   const { props } = component
 
   const propNode = []
@@ -16,14 +23,28 @@ const ComponentPage = ({ component }) => {
     )
   }
 
+  let ExampleComponent
+  try {
+    ExampleComponent =
+      require(`./examples/${component.name}/${component.name}`).default
+  } catch (error) {
+    console.log(error)
+  }
+
   return (
     <div className="content">
       <h1>{component.name}</h1>
 
       <p>Description: {component.description}</p>
 
-      <h3 className="mt-1">Code</h3>
-      <code>{component.code}</code>
+      <h3 className="mt-1">Example</h3>
+      {ExampleComponent ? <ExampleComponent /> : 'No Examples'}
+
+      <h3 onClick={() => setShowCode(!showCode)} className="mt-1">
+        Show Code
+      </h3>
+
+      {showCode && <CodeWrapper>{component.code}</CodeWrapper>}
 
       {props ? (
         <div className="mt-1">
