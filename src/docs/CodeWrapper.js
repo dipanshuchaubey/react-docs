@@ -12,12 +12,7 @@ export default class CodeWrapper extends Component {
   render() {
     return (
       <pre
-        style={{
-          padding: '1rem',
-          margin: '0.5rem',
-          borderRadius: '10px',
-          boxShadow: '0 0 3px #222',
-        }}
+        className="card"
         ref={(ref) => {
           this.element = ref
         }}

@@ -26,6 +26,7 @@ export default class Docs extends Component {
         <Navigation
           components={componentData.map((component) => component.name)}
         />
+
         <ComponentPage
           component={
             route

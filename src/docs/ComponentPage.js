@@ -33,39 +33,41 @@ const ComponentPage = ({ component }) => {
 
   return (
     <div className="content">
-      <h1>{component.name}</h1>
+      <div className="container">
+        <h1>{component.name}</h1>
 
-      <p>Description: {component.description}</p>
+        <p>Description: {component.description}</p>
 
-      <h3 className="mt-1">Example</h3>
-      {ExampleComponent ? <ExampleComponent /> : 'No Examples'}
+        <h3 className="mt-1">Example</h3>
+        {ExampleComponent ? <ExampleComponent /> : 'No Examples'}
 
-      <h3 onClick={() => setShowCode(!showCode)} className="mt-1">
-        Show Code
-      </h3>
+        <h3 onClick={() => setShowCode(!showCode)} className="button mt-1">
+          {showCode ? 'Hide' : 'Show'} Code
+        </h3>
 
-      {showCode && <CodeWrapper>{component.code}</CodeWrapper>}
+        {showCode && <CodeWrapper>{component.code}</CodeWrapper>}
 
-      {props ? (
-        <div className="mt-1">
-          <h3>Props</h3>
+        {props ? (
+          <div className="mt-1">
+            <h3>Props</h3>
 
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>Required</th>
-              </tr>
-            </thead>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Type</th>
+                  <th>Required</th>
+                </tr>
+              </thead>
 
-            <tbody>{propNode}</tbody>
-          </table>
-        </div>
-      ) : (
-        'No Props'
-      )}
+              <tbody>{propNode}</tbody>
+            </table>
+          </div>
+        ) : (
+          'No Props'
+        )}
+      </div>
     </div>
   )
 }
