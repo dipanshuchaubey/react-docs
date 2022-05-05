@@ -5,9 +5,9 @@ const chokidar = require('chokidar')
 const parse = require('react-docgen').parse
 
 const paths = {
-  components: path.join(__dirname, '../', 'src', 'components'),
-  examples: path.join(__dirname, '../', 'src', 'examples'),
-  output: path.join(__dirname, '../', 'config', 'componentData.js'),
+  components: path.join(__dirname, '../src', 'components'),
+  examples: path.join(__dirname, '../src', 'docs', 'examples'),
+  output: path.join(__dirname, '../config', 'componentData.js'),
 }
 
 const watchMode = process.argv.splice(2) == '--watch'
@@ -36,6 +36,7 @@ function generate(paths) {
       description: res.description,
       props: res.props,
       code: componentData,
+      examples: getExampleData(path.examples, res.displayName),
     })
   })
 
@@ -45,3 +46,5 @@ function generate(paths) {
     'utf-8'
   )
 }
+
+function getExampleData(examplesPath, componentName) {}
