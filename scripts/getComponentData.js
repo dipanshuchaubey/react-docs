@@ -36,7 +36,7 @@ function generate(paths) {
       description: res.description,
       props: res.props,
       code: componentData,
-      examples: getExampleData(path.examples, res.displayName),
+      examples: getExampleData(paths.examples, res.displayName),
     })
   })
 
@@ -47,4 +47,25 @@ function generate(paths) {
   )
 }
 
-function getExampleData(examplesPath, componentName) {}
+function getExampleData(examplesPath, componentName) {
+  const files = getExampleFile(path.join(examplesPath, componentName))
+  return files.map((file) => {
+    const exampleData = fs.readFileSync(
+      path.join(examplesPath, componentName, file),
+      'utf-8'
+    )
+    const parsed = parse(exampleData)
+
+    return {
+      name: file.slice(0, -3),
+      description: parsed.description,
+      code: exampleData,
+    }
+  })
+}
+
+function getExampleFile(filepath) {
+  return fs.readdirSync(filepath).filter((file) => {
+    return fs.statSync(path.join(filepath, file)).isFile()
+  })
+}
