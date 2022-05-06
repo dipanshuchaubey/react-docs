@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import CodeWrapper from './CodeWrapper'
+import React from 'react'
+import CodeExample from './CodeExample'
 
 const ComponentPage = ({ component }) => {
-  const [showCode, setShowCode] = useState(false)
-
-  useEffect(() => {
-    setShowCode(false)
-  }, [component])
+  if (!component || component.length < 1) {
+    return <></>
+  }
 
   const { props } = component
 
@@ -16,19 +14,14 @@ const ComponentPage = ({ component }) => {
     propNode.push(
       <tr key={prop}>
         <td>{prop}</td>
-        <td>{props[prop].description}</td>
+        <td>{props[prop].description || '-'}</td>
         <td>{props[prop].type.name}</td>
         <td>{props[prop].required ? 'Yes' : 'No'}</td>
+        <td>
+          {props[prop].defaultValue ? props[prop].defaultValue.value : '-'}
+        </td>
       </tr>
     )
-  }
-
-  let ExampleComponent
-  try {
-    ExampleComponent =
-      require(`./examples/${component.name}/${component.name}`).default
-  } catch (error) {
-    console.log(error)
   }
 
   return (
@@ -39,13 +32,12 @@ const ComponentPage = ({ component }) => {
         <p>Description: {component.description}</p>
 
         <h3 className="mt-1">Example</h3>
-        {ExampleComponent ? <ExampleComponent /> : 'No Examples'}
 
-        <h3 onClick={() => setShowCode(!showCode)} className="button mt-1">
-          {showCode ? 'Hide' : 'Show'} Code
-        </h3>
-
-        {showCode && <CodeWrapper>{component.code}</CodeWrapper>}
+        {component.examples.length > 0
+          ? component.examples.map((example) => (
+              <CodeExample component={component.name} example={example} />
+            ))
+          : 'No Examples'}
 
         {props ? (
           <div className="mt-1">
@@ -58,6 +50,7 @@ const ComponentPage = ({ component }) => {
                   <th>Description</th>
                   <th>Type</th>
                   <th>Required</th>
+                  <th>Default Value</th>
                 </tr>
               </thead>
 
