@@ -1,5 +1,4 @@
-import React from 'react'
-import SayHello from '../../../components/SayHello/SayHello'
+import SayHello from 'react-docs/SayHello'
 
 const SayHelloExample = () => {
   return (
