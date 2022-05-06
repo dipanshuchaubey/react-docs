@@ -1,5 +1,4 @@
-import React from 'react'
-import Alert from '../../../components/Alert/Alert'
+import Alert from 'react-docs/Alert'
 
 const AlertExample = () => {
   return (

@@ -17,8 +17,4 @@ SayHello.propTypes = {
   time: PropTypes.string,
 }
 
-SayHello.defaultProps = {
-  user: 'Dipanshu',
-}
-
 export default SayHello
