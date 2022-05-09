@@ -30,6 +30,10 @@ body {
   margin: 0.3rem 0;
 }
 
+.button.button--primary {
+  background-color: rgb(28, 74, 181);
+}
+
 .button:hover {
   background-color: #333;
 }
@@ -56,6 +60,10 @@ body {
 .text {
   text-decoration: none;
   margin: 0.2rem 0;
+}
+
+.text--center {
+  text-align: center;
 }
 
 .text--dark {
@@ -131,4 +139,32 @@ td {
   margin-inline: -1rem;
   margin-bottom: 1rem;
   padding: 0 1rem 0.5rem 1rem;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: rgba(2, 2, 2, 0.5);
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal__view {
+  min-width: 50%;
+  max-width: 60%;
+
+  margin: auto;
+  background-color: #f8f8f8;
+  padding: 1rem;
+  border-radius: 10px;
 }
