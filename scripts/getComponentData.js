@@ -49,6 +49,7 @@ function generate(paths) {
 
 function getExampleData(examplesPath, componentName) {
   const files = getExampleFile(path.join(examplesPath, componentName))
+
   return files.map((file) => {
     const exampleData = fs.readFileSync(
       path.join(examplesPath, componentName, file),
@@ -65,7 +66,15 @@ function getExampleData(examplesPath, componentName) {
 }
 
 function getExampleFile(filepath) {
-  return fs.readdirSync(filepath).filter((file) => {
-    return fs.statSync(path.join(filepath, file)).isFile()
-  })
+  let examples = []
+
+  try {
+    examples = fs.readdirSync(filepath).filter((file) => {
+      return fs.statSync(path.join(filepath, file)).isFile()
+    })
+  } catch (error) {
+    console.log(chalk.red(`No Examples Found for ${filepath}`))
+  }
+
+  return examples
 }
