@@ -34,8 +34,12 @@ const ComponentPage = ({ component }) => {
         <h3 className="mt-1">Example</h3>
 
         {component.examples.length > 0
-          ? component.examples.map((example) => (
-              <CodeExample component={component.name} example={example} />
+          ? component.examples.map((example, index) => (
+              <CodeExample
+                key={index}
+                component={component.name}
+                example={example}
+              />
             ))
           : 'No Examples'}
 
